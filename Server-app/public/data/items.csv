@@ -1,0 +1,8 @@
+id,name,description,price,category_id
+01,Storage 1,Storage Unit 1,400,01
+02,Storage 2,Storage Unit 2,300,01
+03,Nokia 3310,Nokia 3310 cell phone,100,02
+04,Apple Macintosh 1984,Apple Macintosh on 1984,200,03
+05,1956 Ford Sunliner,Classic car Ford,16000,04
+06,1957 Chevrolet Bel Air,Classic car Chevrolet,32000,04
+07,Rolex Submariner Hulk Green, Rolex watch,29000,05
