@@ -6,6 +6,7 @@ import {
   TextInput,
   Button,
   FlatList,
+  SectionList,
   TouchableOpacity,
 } from 'react-native';
 
@@ -17,6 +18,31 @@ const ItemList = props => {
 
 	const [isAddMode, setIsAddMode] = useState(false);
 	const [item, setItem] = useState(Object());
+	const [showData, setShowData] = useState([]);
+
+	const dataHandler = () => {
+		let sectionArray = [];
+		let section = {'title':'', 'data':[]};
+
+
+	  props.data.forEach((item) => {
+	    if (item.name.indexOf(props.searchText) === -1) {
+	      return;
+	    }
+	    if (item.category != section['title']) {
+	    	if (section['title'].length !== 0) {
+	    		sectionArray.push(section);
+	    		// console.log('DATA if', DATA);
+	    		section = {'title':'', 'data':[]};
+	    	}
+	    	section['title'] = item.category;
+	    }
+	    section['data'].push(item);
+	  });
+	  return sectionArray;
+	}
+
+const DATA = dataHandler();
 
 	const returnHomepageHandler = () => {
     setIsAddMode(false);
@@ -27,6 +53,15 @@ const ItemList = props => {
   	setItem(item);
   }
 
+  function Item({ title }) {
+	  return (
+	    <View>
+	      <Text style={styles.title}>{title.name}</Text>
+	      <Text style={styles.title}>{title.price}</Text>
+	    </View>
+	  );
+	}
+
 	return (
 		<View>
 			<DisplayItem
@@ -34,17 +69,18 @@ const ItemList = props => {
 				visible={isAddMode}
 				onReturn={returnHomepageHandler}
 			/>
-      <FlatList
-        data={props.data}
-        renderItem={itemData =>
-	        <TouchableOpacity onPress={() => displayItemHandler(itemData.item) } >
-		    		<View style={styles.ListItem}>
-		          <Text>{itemData.item.name}</Text>
-		          <Text>{itemData.item.price}</Text>
-		        </View>
-	      	</TouchableOpacity>
-        }
+
+			<SectionList
+        sections={DATA}
+        keyExtractor={(item, index) => item + index}
+        renderItem={({ item }) => <Item title={item} />}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text>{title}</Text>
+        )}
       />
+
+     
+
     </View>
 	);
 }
