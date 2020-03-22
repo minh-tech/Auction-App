@@ -20,6 +20,7 @@ class App extends Component {
       {"id":"02","name":"Storage 2","description":"Storage Unit 2","price":"300","category":"Storage Unit"},
       {"id":"03","name":"Nokia 3310","description":"Nokia 3310 cell phone","price":"100","category":"Cell Phone"},
       {"id":"04","name":"Apple Macintosh 1984","description":"Apple Macintosh on 1984","price":"200","category":"Computer"},
+      {"id":"05","name":"1956 Ford Sunliner","description":"Classic car Ford","price":"16000","category":"Automobile"},
       {"id":"06","name":"1957 Chevrolet Bel Air","description":"Classic car Chevrolet","price":"32000","category":"Automobile"},
       {"id":"07","name":"Rolex Submariner Hulk Green","description":"Rolex watch","price":"29000","category":"Watch"},
     ];
