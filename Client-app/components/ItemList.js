@@ -47,7 +47,7 @@ const DATA = dataHandler();
   	setIsAddMode(true);
   	setSelectedItem(item);
   }
-  
+
 	return (
 		<View>
 			<DisplayItem
@@ -57,6 +57,7 @@ const DATA = dataHandler();
 			/>
 
 			<SectionList
+				style={styles.ListView}
         sections={DATA}
         keyExtractor={(item, index) => item + index}
         renderItem={({ item }) => (
@@ -84,6 +85,9 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
   },
+  ListView: {
+  	maxHeight: 550,
+  }
 });
 
 export default ItemList;
