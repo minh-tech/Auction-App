@@ -7,12 +7,12 @@ import {
 
 const ItemRow = props => {
 
-	const item = this.props.item;
+	const item = props.item;
 
 	return (
 		<View style={styles.ItemRow} >
 			<Text>{item.name}</Text>
-			<Text>{item.price}</Text>
+			<Text>${item.price}</Text>
 		</View>
   );
 };
@@ -20,6 +20,10 @@ const ItemRow = props => {
 const styles=StyleSheet.create({
 	ItemRow: {
 		flexDirection: 'row',
+		padding: 6,
+    marginVertical: 10,
+    backgroundColor: '#ccc',
+    justifyContent: 'space-between',
 	}
 });
 

@@ -3,9 +3,6 @@ import {
   StyleSheet,
   View,
   Text,
-  TextInput,
-  Button,
-  FlatList,
   SectionList,
   TouchableOpacity,
 } from 'react-native';
@@ -17,31 +14,29 @@ import DisplayItem from './DisplayItem';
 const ItemList = props => {
 
 	const [isAddMode, setIsAddMode] = useState(false);
-	const [item, setItem] = useState(Object());
-	const [showData, setShowData] = useState([]);
+	const [selectedItem, setSelectedItem] = useState(Object());
 
 	const dataHandler = () => {
 		let sectionArray = [];
-		let section = {'title':'', 'data':[]};
-
+		let categoryDict = {};
 
 	  props.data.forEach((item) => {
 	    if (item.name.indexOf(props.searchText) === -1) {
 	      return;
 	    }
-	    if (item.category != section['title']) {
-	    	if (section['title'].length !== 0) {
-	    		sectionArray.push(section);
-	    		// console.log('DATA if', DATA);
-	    		section = {'title':'', 'data':[]};
-	    	}
-	    	section['title'] = item.category;
+	    if (item.category in categoryDict) {
+	    	categoryDict[item.category].push(item);
+	    } else {
+	    	categoryDict[item.category] = [item];
 	    }
-	    section['data'].push(item);
 	  });
+
+	  for (const property in categoryDict) {
+	  	sectionArray.push({'title':property, 'data':categoryDict[property]});
+	  }
+
 	  return sectionArray;
 	}
-
 const DATA = dataHandler();
 
 	const returnHomepageHandler = () => {
@@ -50,22 +45,13 @@ const DATA = dataHandler();
 
   const displayItemHandler = (item) => {
   	setIsAddMode(true);
-  	setItem(item);
+  	setSelectedItem(item);
   }
-
-  function Item({ title }) {
-	  return (
-	    <View>
-	      <Text style={styles.title}>{title.name}</Text>
-	      <Text style={styles.title}>{title.price}</Text>
-	    </View>
-	  );
-	}
-
+  
 	return (
 		<View>
 			<DisplayItem
-				data={item}
+				data={selectedItem}
 				visible={isAddMode}
 				onReturn={returnHomepageHandler}
 			/>
@@ -73,14 +59,19 @@ const DATA = dataHandler();
 			<SectionList
         sections={DATA}
         keyExtractor={(item, index) => item + index}
-        renderItem={({ item }) => <Item title={item} />}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text>{title}</Text>
+        renderItem={({ item }) => (
+        	<TouchableOpacity onPress={() => displayItemHandler(item) } >
+        		<ItemRow item={item} />
+        	</TouchableOpacity>
         )}
+        renderSectionHeader={
+        	({ section: { title } }) => (
+            <ItemCategoryRow category={title}/>
+        	)
+        }
       />
 
-     
-
+   
     </View>
 	);
 }

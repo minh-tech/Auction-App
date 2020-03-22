@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 const ItemCategoryRow = props => {
-	const category = this.props.category;
+	const category = props.category;
 	return (
 		<View>
 			<Text style={styles.categoryStyle} >{category}</Text>
@@ -17,6 +17,7 @@ const ItemCategoryRow = props => {
 const styles=StyleSheet.create({
 	categoryStyle : {
 		fontWeight: 'bold',
+		fontSize: 18
 	},
 });
 

@@ -9,8 +9,6 @@ import {
 
 const DisplayItem = props => {
 
-  // props.onDelete.bind(this,itemData.item.id)
-
 	return (
     <Modal
       visible={props.visible}
@@ -19,7 +17,7 @@ const DisplayItem = props => {
       <View style={styles.Screen} >
         <Text>{props.data.name}</Text>
         <Text>{props.data.description}</Text>
-        <Text>{props.data.price}</Text>
+        <Text>${props.data.price}</Text>
         <Button title="Cancel" onPress={props.onReturn} />
       </View>
     </Modal>
