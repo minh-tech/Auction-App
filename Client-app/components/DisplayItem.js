@@ -6,7 +6,9 @@ import {
   Button,
   Modal,
   Image,
+  TextInput,
 } from 'react-native';
+import CountDown from './CountDown';
 
 const DisplayItem = props => {
   let showImages = [];
@@ -21,8 +23,9 @@ const DisplayItem = props => {
     >
       <View style={styles.Screen} >
         <View style={styles.ImageContainer}>
-          {showImages.map((image) =>
+          {showImages.map((image, index) =>
             <Image
+            key={index}
             style={styles.ImageStyle}
             source={image}
             />
@@ -33,10 +36,16 @@ const DisplayItem = props => {
         <Text>{props.data.description}</Text>
         <Text>${props.data.price}</Text>
 
+        <CountDown time={props.data.starttime} />
+
         <View style={styles.ButtonContainer} >
+          <TextInput
+            placeholder="$00.0"
+            placeholderTextColor='grey'
+          />
           <Button title="Bid" />
-          <Button title="Cancel" onPress={props.onReturn} />
         </View>
+        <Button title="Cancel" onPress={props.onReturn} />
       </View>
     </Modal>
   );

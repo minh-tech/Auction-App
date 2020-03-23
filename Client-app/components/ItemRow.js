@@ -5,6 +5,7 @@ import {
   Text,
   Image,
 } from 'react-native';
+import CountDown from './CountDown';
 
 const ItemRow = props => {
 
@@ -16,8 +17,11 @@ const ItemRow = props => {
         style={styles.ImageStyle}
         source={props.firstImage}
         />
+      <View>
 			<Text>{item.name}</Text>
 			<Text>${item.price}</Text>
+			<CountDown time={item.starttime} />
+			</View>
 		</View>
   );
 };
